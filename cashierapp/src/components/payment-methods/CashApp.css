@@ -1,0 +1,72 @@
+.cashapp-section .section-content {
+  background-color: #00D632;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.warning-container {
+  margin-bottom: 1rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.warning-checkbox {
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+
+.warning-text {
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.4;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.error-message {
+  color: #ff0000;
+  font-weight: bold;
+  margin-top: 1rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.cashapp-link {
+  display: inline-block;
+  color: white !important;
+  text-decoration: none !important;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.cashapp-link:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}ection {
+  padding: 1rem;
+}
+
+.section-content {
+  background-color: #00BD46;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.section-content h2 {
+  margin-top: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,121 @@
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.payment-details {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+.input-group {
+  margin-bottom: 1rem;
+  width: auto;
+}
+
+.input-group:last-child {
+  margin-bottom: 0;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: white;
+  font-weight: 500;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #646cff;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.payment-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.payment-section {
+  width: 100%;
+}
+
+.payment-button {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: #3a3a3a;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.payment-button:hover {
+  background: #4a4a4a;
+  transform: translateY(-2px);
+}
+
+.payment-button.active {
+  background: #646cff;
+  box-shadow: 0 2px 4px rgba(100, 108, 255, 0.4);
+}
+
+.collapsible-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  border-radius: 0 0 8px 8px;
+}
+
+.collapsible-content.open {
+  max-height: 800px;
+}
+
+.content-inner {
+  padding: 1.5rem;
+  color: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.content-inner p {
+  margin: 0;
+  line-height: 1.6;
+}
