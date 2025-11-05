@@ -8,7 +8,7 @@ const CashAppSection: React.FC = () => {
   const { amount } = useContext(PaymentContext);
 
   const getCashAppUrl = () => {
-    let url = `https://cash.app/$${recipient}?amount=${amount}`;
+    let url = `https://cash.app/$${recipient}/${amount}`;
     return url;
   };
 
