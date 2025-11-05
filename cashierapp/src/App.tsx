@@ -3,9 +3,8 @@ import './App.css'
 
 // Create context for payment details
 export const PaymentContext = createContext({
-  recipient: '',
+  recipient: import.meta.env.VITE_RECIPIENT_ID || '',
   note: '',
-  setRecipient: (recipient: string) => {},
   setNote: (note: string) => {}
 });
 
@@ -18,49 +17,28 @@ const ApplePaySection = lazy(() => import('./components/payment-methods/ApplePay
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [recipient, setRecipient] = useState('');
   const [note, setNote] = useState('');
+  const recipient = import.meta.env.VITE_RECIPIENT_ID || '';
 
   const toggleSection = (section: string) => {
     setActiveSection(activeSection === section ? null : section);
   };
 
   const paymentMethods = [
-    { id: 'paypal', name: 'PayPal', Component: PayPalSection },
-    { id: 'cashapp', name: 'CashApp', Component: CashAppSection },
-    { id: 'chime', name: 'Chime', Component: ChimeSection },
-    { id: 'venmo', name: 'Venmo', Component: VenmoSection },
-    { id: 'applepay', name: 'Apple Pay', Component: ApplePaySection }
+    { id: 'venmo', name: 'Venmo', Component: VenmoSection, logo: '/logos/venmo.png' },
+    { id: 'paypal', name: 'PayPal', Component: PayPalSection, logo: '/logos/paypal.png' },
+    { id: 'cashapp', name: 'CashApp', Component: CashAppSection, logo: '/logos/cashapp.png' },
+    { id: 'chime', name: 'Chime', Component: ChimeSection, logo: '/logos/chime.png' },
+    //{ id: 'applepay', name: 'Apple Pay', Component: ApplePaySection, logo: '/logos/apple.png' }
   ];
 
   return (
-    <PaymentContext.Provider value={{ recipient, note, setRecipient, setNote }}>
+    <PaymentContext.Provider value={{ recipient, note, setNote }}>
       <div className="app-container">
         <header className="app-header">
-          <h1>Cashier App POC</h1>
+          <h1>Cashier App</h1>
+          <h2>Please select your payment method below</h2>
         </header>
-        <div className="payment-details">
-          <div className="input-group">
-            <label htmlFor="recipient">Recipient ID:</label>
-            <input
-              type="text"
-              id="recipient"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              placeholder="Enter recipient ID"
-            />
-          </div>
-          <div className="input-group">
-            <label htmlFor="note">Payment Note:</label>
-            <input
-              type="text"
-              id="note"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="Enter payment note"
-            />
-          </div>
-        </div>
         <main className="payment-sections">
           {paymentMethods.map((method) => (
             <div key={method.id} className="payment-section">
@@ -68,7 +46,10 @@ function App() {
                 className={`payment-button ${activeSection === method.id ? 'active' : ''}`}
                 onClick={() => toggleSection(method.id)}
               >
-                {method.name}
+                <span className="button-content">
+                  <span className="button-text">{method.name}</span>
+                  <img src={method.logo} alt={`${method.name} logo`} className="payment-logo" />
+                </span>
               </button>
               <div className={`collapsible-content ${activeSection === method.id ? 'open' : ''}`}>
                 <div className="content-inner">

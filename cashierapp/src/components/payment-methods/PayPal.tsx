@@ -8,9 +8,6 @@ const PayPalSection: React.FC = () => {
 
   const getPayPalUrl = () => {
     let url = `https://paypal.me/${recipient}`;
-    if (note) {
-      url += `?note=${encodeURIComponent(note)}`;
-    }
     return url;
   };
 

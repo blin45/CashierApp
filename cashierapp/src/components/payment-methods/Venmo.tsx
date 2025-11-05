@@ -3,7 +3,7 @@ import { PaymentContext } from '../../App';
 import './Venmo.css';
 
 const VenmoSection: React.FC = () => {
-  const { recipient, note } = useContext(PaymentContext);
+  const { recipient, note, setNote } = useContext(PaymentContext);
 
   const getVenmoUrl = () => {
     let url = `https://venmo.com/${recipient}`;
@@ -17,6 +17,16 @@ const VenmoSection: React.FC = () => {
     <div className="venmo-section">
       <div className="section-content">
         <h2>Venmo Payment Details</h2>
+        <div className="input-group">
+          <label htmlFor="note">User ID:</label>
+          <input
+            type="text"
+            id="note"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            placeholder="Enter User ID"
+          />
+        </div>
         {recipient ? (
           <a 
             target="_blank" 
