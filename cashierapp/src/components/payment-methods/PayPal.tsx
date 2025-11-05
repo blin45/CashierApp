@@ -5,9 +5,10 @@ import './PayPal.css';
 const PayPalSection: React.FC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const { recipient, note } = useContext(PaymentContext);
+  const { amount } = useContext(PaymentContext);
 
   const getPayPalUrl = () => {
-    let url = `https://paypal.me/${recipient}`;
+    let url = `https://paypal.me/${recipient}/${amount}`;
     return url;
   };
 

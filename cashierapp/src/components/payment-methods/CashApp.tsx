@@ -5,9 +5,10 @@ import './CashApp.css';
 const CashAppSection: React.FC = () => {
   const [isChecked, setIsChecked] = useState(false);
   const { recipient } = useContext(PaymentContext);
+  const { amount } = useContext(PaymentContext);
 
   const getCashAppUrl = () => {
-    let url = `https://cash.app/$${recipient}`;
+    let url = `https://cash.app/$${recipient}?amount=${amount}`;
     return url;
   };
 

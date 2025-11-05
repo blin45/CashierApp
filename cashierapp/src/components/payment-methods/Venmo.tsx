@@ -3,13 +3,10 @@ import { PaymentContext } from '../../App';
 import './Venmo.css';
 
 const VenmoSection: React.FC = () => {
-  const { recipient, note, setNote } = useContext(PaymentContext);
+  const { recipient, note, amount, setNote } = useContext(PaymentContext);
 
   const getVenmoUrl = () => {
-    let url = `https://venmo.com/${recipient}`;
-    if (note) {
-      url += `?note=${encodeURIComponent(note)}`;
-    }
+    let url = `https://venmo.com/${recipient}?note=${encodeURIComponent(note)}&amount=${amount}`;
     return url;
   };
 
@@ -27,17 +24,17 @@ const VenmoSection: React.FC = () => {
             placeholder="Enter User ID"
           />
         </div>
-        {recipient ? (
-          <a 
-            target="_blank" 
-            rel="noopener noreferrer" 
+        {note && note.trim() ? (
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
             className="venmo-link"
             href={getVenmoUrl()}
           >
             Open Venmo
           </a>
         ) : (
-          <p className="error-message">Please enter a recipient ID above</p>
+          <p className="error-message">Please enter a User ID above</p>
         )}
       </div>
     </div>

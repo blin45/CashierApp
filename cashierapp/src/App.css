@@ -25,6 +25,7 @@
   font-weight: 700;
   margin-bottom: 1rem;
   background: linear-gradient(135deg, var(--primary-light), var(--accent));
+  background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   letter-spacing: -0.02em;
@@ -36,6 +37,61 @@
   font-weight: 500;
   margin: 0;
   opacity: 0.9;
+}
+
+.amount-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%; /* keeps the select compact like a typical amount chooser */
+  color: grey;
+}
+
+.amount-section label {
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.amount-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: var(--surface-light);
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.18s ease-in-out;
+  cursor: pointer;
+  box-shadow: none;
+}
+
+.amount-select:focus {
+  outline: none;
+  border-color: #646cff;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 12px -6px rgba(100, 108, 255, 0.35);
+}
+
+.amount-select::-ms-expand { /* hide default arrow on IE/Edge */
+  display: none;
+}
+
+/* Ensure the dropdown options match the closed select background so the text remains readable */
+.amount-select option {
+  background: var(--surface-light);
+  color: var(--text-primary);
+}
+
+/* Subtle highlight for hovered/selected options so they remain distinguishable */
+.amount-select option:checked,
+.amount-select option:hover {
+  background: rgba(100, 108, 255, 0.12);
+  color: var(--text-primary);
 }
 
 .payment-details {

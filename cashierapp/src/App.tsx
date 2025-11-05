@@ -5,7 +5,9 @@ import './App.css'
 export const PaymentContext = createContext({
   recipient: import.meta.env.VITE_RECIPIENT_ID || '',
   note: '',
-  setNote: (note: string) => {}
+  setNote: (note: string) => {},
+  amount: null as number | null,
+  setAmount: (_amount: number | null) => {}
 });
 
 // Lazy load all payment method components
@@ -13,11 +15,12 @@ const PayPalSection = lazy(() => import('./components/payment-methods/PayPal'));
 const CashAppSection = lazy(() => import('./components/payment-methods/CashApp'));
 const ChimeSection = lazy(() => import('./components/payment-methods/Chime'));
 const VenmoSection = lazy(() => import('./components/payment-methods/Venmo'));
-const ApplePaySection = lazy(() => import('./components/payment-methods/ApplePay'));
+
 
 function App() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [note, setNote] = useState('');
+  const [amount, setAmount] = useState<number | null>(null);
   const recipient = import.meta.env.VITE_RECIPIENT_ID || '';
 
   const toggleSection = (section: string) => {
@@ -33,36 +36,60 @@ function App() {
   ];
 
   return (
-    <PaymentContext.Provider value={{ recipient, note, setNote }}>
+    <PaymentContext.Provider value={{ recipient, note, setNote, amount, setAmount }}>
       <div className="app-container">
         <header className="app-header">
           <h1>Cashier App</h1>
           <h2>Please select your payment method below</h2>
         </header>
-        <main className="payment-sections">
-          {paymentMethods.map((method) => (
-            <div key={method.id} className="payment-section">
-              <button
-                className={`payment-button ${activeSection === method.id ? 'active' : ''}`}
-                onClick={() => toggleSection(method.id)}
-              >
-                <span className="button-content">
-                  <span className="button-text">{method.name}</span>
-                  <img src={method.logo} alt={`${method.name} logo`} className="payment-logo" />
-                </span>
-              </button>
-              <div className={`collapsible-content ${activeSection === method.id ? 'open' : ''}`}>
-                <div className="content-inner">
-                  {activeSection === method.id && (
-                    <Suspense fallback={<div>Loading...</div>}>
-                      <method.Component />
-                    </Suspense>
-                  )}
+        <section className="amount-section">
+          <label htmlFor="amount-select">Select amount (USD):</label>
+          <select
+            id="amount-select"
+            value={amount === null ? '' : amount}
+            onChange={(e) => {
+              const val = e.target.value;
+              setAmount(val ? Number(val) : null);
+              setActiveSection(null); // reset active section when amount changes
+            }}
+            className="amount-select"
+          >
+            <option value="" disabled>Select amount</option>
+            <option value={1}>$1</option>
+            <option value={5}>$5</option>
+            <option value={10}>$10</option>
+            <option value={20}>$20</option>
+            <option value={50}>$50</option>
+            <option value={100}>$100</option>
+          </select>
+        </section>
+
+        {amount !== null && (
+          <main className="payment-sections">
+            {paymentMethods.map((method) => (
+              <div key={method.id} className="payment-section">
+                <button
+                  className={`payment-button ${activeSection === method.id ? 'active' : ''}`}
+                  onClick={() => toggleSection(method.id)}
+                >
+                  <span className="button-content">
+                    <span className="button-text">{method.name}</span>
+                    <img src={method.logo} alt={`${method.name} logo`} className="payment-logo" />
+                  </span>
+                </button>
+                <div className={`collapsible-content ${activeSection === method.id ? 'open' : ''}`}> 
+                  <div className="content-inner">
+                    {activeSection === method.id && (
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <method.Component />
+                      </Suspense>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </main>
+            ))}
+          </main>
+        )}
       </div>
     </PaymentContext.Provider>
   )
