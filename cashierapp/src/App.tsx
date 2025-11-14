@@ -2,13 +2,20 @@ import { useState, lazy, Suspense, createContext } from 'react'
 import './App.css'
 
 // Create context for payment details
-export const PaymentContext = createContext({
-  recipient: import.meta.env.VITE_RECIPIENT_ID || '',
+export const PaymentContext = createContext<{
+  recipient: string;
+  note: string;
+  setNote: (note: string) => void;
+  amount: number | null;
+  setAmount: (amount: number | null) => void;
+}>({
+  recipient: '',
   note: '',
-  setNote: (note: string) => {},
-  amount: null as number | null,
-  setAmount: (_amount: number | null) => {}
+  setNote: () => {},
+  amount: null,
+  setAmount: () => {}
 });
+
 
 // Lazy load all payment method components
 const PayPalSection = lazy(() => import('./components/payment-methods/PayPal'));
